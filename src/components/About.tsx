@@ -8,6 +8,11 @@ const About = () => {
         <p className="para">
           I am an MTech student in Artificial Intelligence at IIT Jodhpur, with a strong background in Computer Science and Engineering. I am passionate about Machine Learning, Deep Learning, and NLP. I thrive on building scalable AI models, predictive pipelines, and data-driven solutions.
         </p>
+        <div className="resume-wrapper">
+          <a href="/Divyansh_Rawat_Resume.pdf" target="_blank" rel="noopener noreferrer" className="resume-btn" data-cursor="disable">
+            Download Resume
+          </a>
+        </div>
       </div>
     </div>
   );
