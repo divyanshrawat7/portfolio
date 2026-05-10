@@ -43,6 +43,8 @@
   border-radius: 4px;
   text-transform: uppercase;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 999;
 }
 
 .resume-btn:hover {
