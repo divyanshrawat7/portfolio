@@ -24,6 +24,7 @@ const Work = () => {
       const translateX = rect.width * boxes.length - (rectLeft + parentWidth) + padding;
 
       const st = ScrollTrigger.getById("work");
+      // @ts-ignore
       if (st) st.end = `+=${translateX}`;
 
       if (timeline) {
