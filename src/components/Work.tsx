@@ -1,51 +1,79 @@
+// ...existing code...
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
-  useGSAP(() => {
-  let translateX: number = 0;
+  useEffect(() => {
+    let timeline: gsap.core.Timeline | null = null;
 
-  function setTranslateX() {
-    const box = document.getElementsByClassName("work-box");
-    const rectLeft = document
-      .querySelector(".work-container")!
-      .getBoundingClientRect().left;
-    const rect = box[0].getBoundingClientRect();
-    const parentWidth = box[0].parentElement!.getBoundingClientRect().width;
-    let padding: number =
-      parseInt(window.getComputedStyle(box[0]).padding) / 2;
-    translateX = rect.width * box.length - (rectLeft + parentWidth) + padding;
-  }
+    const onResize = () => {
+      const boxes = document.getElementsByClassName("work-box");
+      if (!boxes.length) return;
+      const container = document.querySelector(".work-container");
+      if (!container) return;
 
-  setTranslateX();
+      const rectLeft = container.getBoundingClientRect().left;
+      const rect = (boxes[0] as Element).getBoundingClientRect();
+      const parentWidth = boxes[0].parentElement!.getBoundingClientRect().width;
+      const padding = parseInt(window.getComputedStyle(boxes[0] as Element).padding || "0", 10) / 2;
+      const translateX = rect.width * boxes.length - (rectLeft + parentWidth) + padding;
 
-  let timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".work-section",
-      start: "top top",
-      end: `+=${translateX}`, // Use actual scroll width
-      scrub: true,
-      pin: true,
-      id: "work",
-    },
-  });
+      const st = ScrollTrigger.getById("work");
+      if (st) st.end = `+=${translateX}`;
 
-  timeline.to(".work-flex", {
-    x: -translateX,
-    ease: "none",
-  });
+      if (timeline) {
+        timeline.clear();
+        timeline.to(".work-flex", { x: -translateX, ease: "none" });
+      }
+    };
 
-  // Clean up (optional, good practice)
-  return () => {
-    timeline.kill();
-    ScrollTrigger.getById("work")?.kill();
-  };
-}, []);
+    const setup = () => {
+      const boxes = document.getElementsByClassName("work-box");
+      if (!boxes.length) return;
+
+      const container = document.querySelector(".work-container");
+      if (!container) return;
+
+      const rectLeft = container.getBoundingClientRect().left;
+      const rect = (boxes[0] as Element).getBoundingClientRect();
+      const parentWidth = boxes[0].parentElement!.getBoundingClientRect().width;
+      const padding = parseInt(window.getComputedStyle(boxes[0] as Element).padding || "0", 10) / 2;
+      const translateX = rect.width * boxes.length - (rectLeft + parentWidth) + padding;
+
+      timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".work-section",
+          start: "top top",
+          end: `+=${translateX}`,
+          scrub: true,
+          pin: true,
+          id: "work",
+        },
+      });
+
+      timeline.to(".work-flex", { x: -translateX, ease: "none" });
+
+      window.addEventListener("resize", onResize);
+    };
+
+    setup();
+
+    return () => {
+      if (timeline) {
+        timeline.kill();
+        timeline = null;
+      }
+      const st = ScrollTrigger.getById("work");
+      if (st) st.kill();
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
     <div className="work-section" id="work">
       <div className="work-container section-container">
@@ -53,23 +81,48 @@ const Work = () => {
           My <span>Work</span>
         </h2>
         <div className="work-flex">
-          {[...Array(6)].map((_value, index) => (
-            <div className="work-box" key={index}>
-              <div className="work-info">
-                <div className="work-title">
-                  <h3>0{index + 1}</h3>
-
-                  <div>
-                    <h4>Project Name</h4>
-                    <p>Category</p>
-                  </div>
+          <div className="work-box">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>01</h3>
+                <div>
+                  <h4>Distributed Recommendation System</h4>
+                  <p>Machine Learning / Big Data</p>
                 </div>
-                <h4>Tools and features</h4>
-                <p>Javascript, TypeScript, React, Threejs</p>
               </div>
-              <WorkImage image="/images/placeholder.webp" alt="" />
+              <h4>Tools and features</h4>
+              <p>Apache Spark, PySpark, ALS Algorithm, Streamlit</p>
             </div>
-          ))}
+            <WorkImage image="/images/placeholder.webp" alt="Distributed Recommendation System" />
+          </div>
+          <div className="work-box">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>02</h3>
+                <div>
+                  <h4>Energy Consumption Forecasting</h4>
+                  <p>Time Series / Deep Learning</p>
+                </div>
+              </div>
+              <h4>Tools and features</h4>
+              <p>LSTM, XGBoost, Random Forest, Linear Regression</p>
+            </div>
+            <WorkImage image="/images/placeholder.webp" alt="Energy Consumption Forecasting" />
+          </div>
+          <div className="work-box">
+            <div className="work-info">
+              <div className="work-title">
+                <h3>03</h3>
+                <div>
+                  <h4>Face Recognition Attendance System</h4>
+                  <p>Computer Vision</p>
+                </div>
+              </div>
+              <h4>Tools and features</h4>
+              <p>Python, OpenCV, CNN, Face Recognition</p>
+            </div>
+            <WorkImage image="/images/placeholder.webp" alt="Face Recognition Attendance System" />
+          </div>
         </div>
       </div>
     </div>
@@ -77,3 +130,4 @@ const Work = () => {
 };
 
 export default Work;
+// ...existing code...

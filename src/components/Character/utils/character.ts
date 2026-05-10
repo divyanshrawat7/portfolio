@@ -26,32 +26,40 @@ const setCharacter = (
         loader.load(
           blobUrl,
           async (gltf) => {
-            character = gltf.scene;
-            await renderer.compileAsync(character, camera, scene);
-            character.traverse((child: any) => {
-              if (child.isMesh) {
-                const mesh = child as THREE.Mesh;
-                child.castShadow = true;
-                child.receiveShadow = true;
-                mesh.frustumCulled = true;
-              }
-            });
-            resolve(gltf);
-            setCharTimeline(character, camera);
-            setAllTimeline();
-            character!.getObjectByName("footR")!.position.y = 3.36;
-            character!.getObjectByName("footL")!.position.y = 3.36;
-            dracoLoader.dispose();
+            try {
+              character = gltf.scene;
+              await renderer.compileAsync(character, camera, scene);
+              character.traverse((child: any) => {
+                if (child.isMesh) {
+                  const mesh = child as THREE.Mesh;
+                  child.castShadow = true;
+                  child.receiveShadow = true;
+                  mesh.frustumCulled = true;
+                }
+              });
+              resolve(gltf);
+              setCharTimeline(character, camera);
+              setAllTimeline();
+              character!.getObjectByName("footR")!.position.y = 3.36;
+              character!.getObjectByName("footL")!.position.y = 3.36;
+              dracoLoader.dispose();
+              // Clean up blob URL
+              URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+              console.error("Error processing loaded model:", err);
+              reject(err);
+            }
           },
           undefined,
           (error) => {
             console.error("Error loading GLTF model:", error);
+            URL.revokeObjectURL(blobUrl);
             reject(error);
           }
         );
       } catch (err) {
+        console.error("Character loading failed:", err);
         reject(err);
-        console.error(err);
       }
     });
   };

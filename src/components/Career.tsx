@@ -15,43 +15,49 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
+                <h4>MTech in Artificial Intelligence</h4>
+                <h5>Indian Institute of Technology Jodhpur</h5>
               </div>
-              <h3>20XX</h3>
+              <h3>2025 - Present</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
+              Relevant Courses: Machine Learning, Artificial Intelligence, Mathematics & Autonomous Systems.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
+                <h4>Python Developer</h4>
+                <h5>Cruxsphere Technologies Pvt. Ltd.</h5>
               </div>
-              <h3>20XX</h3>
+              <h3>2024</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
+              Processed, cleaned, and transformed datasets using Python, Pandas, and NumPy for machine learning workflows. Developed automated SQL-based data pipelines and reporting scripts.
             </p>
           </div>
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Position In Company</h4>
-                <h5>Company Name</h5>
+                <h4>Front-End Developer</h4>
+                <h5>Behere Elite Technologies</h5>
               </div>
-              <h3>NOW</h3>
+              <h3>2023 - 2024</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim
-              labore sit non ipsum temporibus quidem, deserunt eaque officiis
-              mollitia ratione suscipit repellat.
+              Developed responsive web designs and assisted in the design, development, and maintenance of web applications using HTML, CSS, JavaScript, and React.js.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>BTech in Computer Science and Engineering</h4>
+                <h5>Graphic Era Hill University</h5>
+              </div>
+              <h3>2019 - 2023</h3>
+            </div>
+            <p>
+              Relevant Courses: Computer Architecture, Compiler Design, Operating System, Databases, Computer Networks, Data Structure and Algorithm.
             </p>
           </div>
         </div>
